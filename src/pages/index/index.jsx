@@ -21,7 +21,7 @@ export default function Index() {
 
   const handleInput = e => {
     console.log(e.detail);
-    setContent(e.detail.value);
+    setContent(e.detail.value); // 注释掉此行，第偶数个字的输入可以正常触发input 事件
   };
 
   return (
