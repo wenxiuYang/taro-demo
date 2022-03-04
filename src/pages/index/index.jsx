@@ -1,21 +1,33 @@
-import { useState } from "react";
-import { View, Textarea } from "@tarojs/components";
+import React, { useState } from "react";
+import { View, Input } from "@tarojs/components";
 import "./index.scss";
+
+/**
+ * 
+ * 复现步骤（使用讯飞输入法）Android
+ * 将输入切换至 手写模式
+ * 聚焦 Input 框，手写模式输入内容，步骤如下：
+ * 1. 输入第一个字 正常
+ * 2. 输入第二个字时，onInput 未触发，在候选词手动选择字后，仍不能触发onInput获取到输入内容
+ * 
+ * 所有第偶数个字都不能正常获取到
+ * 
+ * 示例视频在 '../../assets'
+ * 
+ */
 
 export default function Index() {
   const [content, setContent] = useState("");
 
+  const handleInput = e => {
+    console.log(e.detail);
+    setContent(e.detail.value);
+  };
+
   return (
-    <View className="home-page">
-      <Textarea
-        className="textarea"
-        placeholder="请输入内容"
-        autoHeight
-        value={content}
-        // onInput={(e: any) => {
-        // 	setContent(e.detail.value);
-        // }}
-      ></Textarea>
+    <View className="input-page">
+      <View>Input Demo</View>
+      <Input placeholder="请输入..." value={content} onInput={handleInput} />
     </View>
   );
 }
